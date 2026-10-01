@@ -1,4 +1,7 @@
-#EXTM3U
-#EXTINF:-1 tvg-logo="https://imgur.com/DkEs15d.png" group-title="Lokal",indosiar
-https://m.vidio.com/live/205-indosiar{{KEY}}
-hdntl=exp=1790893484~acl=%2fstream%2f205%2fres%3doriginal%2ffile%2fstream.mpd!%2fstream%2f205%2ffile%2f*%2faac%2f*!%2fstream%2f205%2ffile%2f*%2f*-2160p%2f*!%2fstream%2f205%2ffile%2f*%2f*-1440p%2f*!%2fstream%2f205%2ffile%2f*%2f*-1080p%2f*!%2fstream%2f205%2ffile%2f*%2f*-720p%2f*!%2fstream%2f205%2ffile%2f*%2f*-480p%2f*!%2fstream%2f205%2ffile%2f*%2f*-360p%2f*~id=230695320~data=hdntl~hmac=721847ea16e18da22d43fcf52813785b5c1d091f0b892ed4b62883eb46bf1316
+#EXTINF:-1 tvg-logo="https://imgur.com/DkEs15d.png" group-title="📺 || TIVI NASIONAL" http-user-agent="Mozilla/5.0 (Linux; Android 9; MiTV-AXSO1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Mobile Safari/537.36",INDOSIAR (copy)
+#EXTVLCOPT:http-user-agent="Mozilla/5.0 (Linux; Android 9; MiTV-AXSO1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Mobile Safari/537.36"
+#KODIPROP:inputstreamaddon=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=dash
+#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
+#KODIPROP:inputstream.adaptive.license_key=
+https://etslive-v3-vidio-com-tokenized.akamaized.net/stream/205/res=original/file/stream.mpd?{{KEY}}hdntl=exp=1790893484~acl=%2fstream%2f205%2fres%3doriginal%2ffile%2fstream.mpd!%2fstream%2f205%2ffile%2f*%2faac%2f*!%2fstream%2f205%2ffile%2f*%2f*-2160p%2f*!%2fstream%2f205%2ffile%2f*%2f*-1440p%2f*!%2fstream%2f205%2ffile%2f*%2f*-1080p%2f*!%2fstream%2f205%2ffile%2f*%2f*-720p%2f*!%2fstream%2f205%2ffile%2f*%2f*-480p%2f*!%2fstream%2f205%2ffile%2f*%2f*-360p%2f*~id=230695320~data=hdntl~hmac=721847ea16e18da22d43fcf52813785b5c1d091f0b892ed4b62883eb46bf1316

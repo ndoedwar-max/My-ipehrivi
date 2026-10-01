@@ -1,0 +1,43 @@
+import requests
+import re
+
+# 1. URL asal dari provider atau halaman web yang berisi KEY terbaru
+PROVIDER_URL = "https://url-provider-anda.com"
+M3U_TEMPLATE_FILE = "template.m3u"
+OUTPUT_FILE = "playlist.m3u"
+
+def get_latest_key():
+    try:
+        response = requests.get(PROVIDER_URL, timeout=10)
+        # CONTOH LOGIKA: Mencari string key menggunakan Regex jika key ada di dalam teks
+        # Misal format di web: key=abc123xyz
+        match = re.search(r'key=([a-zA-Z0-9]+)', response.text)
+        if match:
+            return match.group(1)
+        return "KEY_NOT_FOUND"
+    except Exception as e:
+        print(f"Gagal mengambil key: {e}")
+        return None
+
+def update_m3u():
+    new_key = get_latest_key()
+    if not new_key or new_key == "KEY_NOT_FOUND":
+        print("Proses dihentikan karena key tidak ditemukan.")
+        return
+
+    print(f"Key terbaru ditemukan: {new_key}")
+
+    # Membaca template file M3U Anda
+    with open(M3U_TEMPLATE_FILE, "r") as file:
+        content = file.read()
+
+    # Mengganti placeholder {{KEY}} dengan key yang baru didapat
+    updated_content = content.replace("{{KEY}}", new_key)
+
+    # Menyimpan menjadi file M3U final yang siap dipakai
+    with open(OUTPUT_FILE, "w") as file:
+        file.write(updated_content)
+    print("File playlist.m3u berhasil diperbarui!")
+
+if __name__ == "__main__":
+    update_m3u()

@@ -1,16 +1,15 @@
 import requests
 import re
 
-# 1. URL asal dari provider atau halaman web yang berisi KEY terbaru
-PROVIDER_URL = "https://url-provider-anda.com"
+https://etslive-v3-vidio-com-tokenized.akamaized.net/stream/205/res=original/file/stream.mpd?hdntl=exp=1790893484~acl=%2fstream%2f205%2fres%3doriginal%2ffile%2fstream.mpd!%2fstream%2f205%2ffile%2f*%2faac%2f*!%2fstream%2f205%2ffile%2f*%2f*-2160p%2f*!%2fstream%2f205%2ffile%2f*%2f*-1440p%2f*!%2fstream%2f205%2ffile%2f*%2f*-1080p%2f*!%2fstream%2f205%2ffile%2f*%2f*-720p%2f*!%2fstream%2f205%2ffile%2f*%2f*-480p%2f*!%2fstream%2f205%2ffile%2f*%2f*-360p%2f*~id=230695320~data=hdntl~hmac=721847ea16e18da22d43fcf52813785b5c1d091f0b892ed4b62883eb46bf1316
+PROVIDER_URL = "https://m.vidio.com/live/205-indosiar"
 M3U_TEMPLATE_FILE = "template.m3u"
 OUTPUT_FILE = "playlist.m3u"
 
 def get_latest_key():
     try:
         response = requests.get(PROVIDER_URL, timeout=10)
-        # CONTOH LOGIKA: Mencari string key menggunakan Regex jika key ada di dalam teks
-        # Misal format di web: key=abc123xyz
+        key=hdntl=exp=1790893484~acl=%2fstream%2f205%2fres%3doriginal%2ffile%2fstream.mpd!%2fstream%2f205%2ffile%2f*%2faac%2f*!%2fstream%2f205%2ffile%2f*%2f*-2160p%2f*!%2fstream%2f205%2ffile%2f*%2f*-1440p%2f*!%2fstream%2f205%2ffile%2f*%2f*-1080p%2f*!%2fstream%2f205%2ffile%2f*%2f*-720p%2f*!%2fstream%2f205%2ffile%2f*%2f*-480p%2f*!%2fstream%2f205%2ffile%2f*%2f*-360p%2f*~id=230695320~data=hdntl~hmac=721847ea16e18da22d43fcf52813785b5c1d091f0b892ed4b62883eb46bf1316
         match = re.search(r'key=([a-zA-Z0-9]+)', response.text)
         if match:
             return match.group(1)
@@ -27,14 +26,11 @@ def update_m3u():
 
     print(f"Key terbaru ditemukan: {new_key}")
 
-    # Membaca template file M3U Anda
-    with open(M3U_TEMPLATE_FILE, "r") as file:
+   with open(M3U_TEMPLATE_FILE, "r") as file:
         content = file.read()
 
-    # Mengganti placeholder {{KEY}} dengan key yang baru didapat
     updated_content = content.replace("{{KEY}}", new_key)
 
-    # Menyimpan menjadi file M3U final yang siap dipakai
     with open(OUTPUT_FILE, "w") as file:
         file.write(updated_content)
     print("File playlist.m3u berhasil diperbarui!")

@@ -1,33 +1,29 @@
-name: Auto Update M3U Key
+export default {
+  async fetch(request, env, ctx) {
+    try {
+      const tokenResponse = await fetch("https://tv123.cc.cd/live.php?ch=1897&sid=8981c850072df7c7ec0d4495faadb2d3&exp=1792648364&sig=bc7d2d13c5ece81c858c0c2f142733638552121d328e7cd89287a5689e52f03d", {
+        headers: { "User-Agent": "Mozilla/5.0" }
+      });
+      
+      const tokenData = await tokenResponse.json();
+{ "key": "1792648364" }
+      const kunciBaru = tokenData.key; 
 
-on:
-  schedule:
-    # Menggunakan format Cron. Contoh di bawah ini berjalan setiap 3 jam.
-    # Anda bisa mengubahnya sesuai kebutuhan.
-    - cron: '0 */3 * * *'
-  workflow_dispatch: # Membantu Anda menjalankan script secara manual kapan saja
+      const m3uContent = `#EXTINF:-1 tvg-id="1032" tvg-name="Indosiar HD" group-title="印尼 | Indonesia",Indosiar HD
+https://tv123.cc.cd/live.php?ch=1897&sid=8981c850072df7c7ec0d4495faadb2d3&exp=1792648364&sig=bc7d2d13c5ece81c858c0c2f142733638552121d328e7cd89287a5689e52f03d
 
-jobs:
-  update-key:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check out repository
-      uses: actions/checkout@v4
+#EXTINF:-1 tvg-id="1032" tvg-name="Indosiar HD" group-title="印尼 | Indonesia",Indosiar HD
+https://tv123.cc.cd/live.php?ch=1897&sid=8981c850072df7c7ec0d4495faadb2d3&exp=1792648364&sig=bc7d2d13c5ece81c858c0c2f142733638552121d328e7cd89287a5689e52f03d
+      return new Response(m3uContent, {
+        headers: {
+          "Content-Type": "application/x-mpegurl", // Memaksa browser/IPTV mengenali ini sebagai file M3U
+          "Access-Control-Allow-Origin": "*",      // Mencegah error CORS di aplikasi tertentu
+          "Cache-Control": "no-cache"              // Memastikan aplikasi selalu minta data paling baru
+        },
+      });
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-python-version: '3.x'
-
-    - name: Install Dependencies
-      run: pip install requests
-
-    - name: Run Script Python
-      run: python update_m3u.py
-
-    - name: Commit and Push if Changes Exist
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add playlist.m3u
-        git diff --quiet && git diff --staged --quiet || (git commit -m "Auto update M3U key" && git push)
+    } catch (error) {
+      return new Response("Gagal memperbarui kunci M3U: " + error.message, { status: 500 });
+    }
+  },
+};

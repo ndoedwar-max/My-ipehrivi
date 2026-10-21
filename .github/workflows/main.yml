@@ -16,9 +16,9 @@ https://tv123.cc.cd/live.php?ch=1897&sid=8981c850072df7c7ec0d4495faadb2d3&exp=17
 https://tv123.cc.cd/live.php?ch=1897&sid=8981c850072df7c7ec0d4495faadb2d3&exp=1792648364&sig=bc7d2d13c5ece81c858c0c2f142733638552121d328e7cd89287a5689e52f03d
       return new Response(m3uContent, {
         headers: {
-          "Content-Type": "application/x-mpegurl", // Memaksa browser/IPTV mengenali ini sebagai file M3U
-          "Access-Control-Allow-Origin": "*",      // Mencegah error CORS di aplikasi tertentu
-          "Cache-Control": "no-cache"              // Memastikan aplikasi selalu minta data paling baru
+          "Content-Type": "application/x-mpegurl",
+          "Access-Control-Allow-Origin": "*",      
+          "Cache-Control": "no-cache"              
         },
       });
 
